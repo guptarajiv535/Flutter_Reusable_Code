@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../components/input_component.dart';
+import '../controller/custom_text_input_controller.dart';
 
 class CustomTextInputOptions {
 

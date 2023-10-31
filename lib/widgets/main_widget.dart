@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../components/input_component.dart';
+import '../controller/custom_text_input_controller.dart';
 import '../main.dart';
 import '../utilities/text_input_options.dart';
 
-class MainScreen extends  State<MyHomePage> {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _paymentController = TextEditingController();
-
-
+class MainScreen extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +61,7 @@ class MainScreen extends  State<MyHomePage> {
       enableBorder: true,
       cornerRadius: 48.0,
       maxLength: 24,
-    ) ;
+    );
 
     CustomTextInputOptions passwordInputOptions = CustomTextInputOptions(
       hintText: 'Enter Password',
@@ -78,25 +72,69 @@ class MainScreen extends  State<MyHomePage> {
       prefixIcon: Icon(Icons.lock, color: Theme.of(context).primaryColor),
     );
 
+    final CustomTextInputController nameController = CustomTextInputController(
+      //textEditingController: TextEditingController(),
+      options: nameInputOptions,
+      context: context,
+      updateState: () {
+        setState(() {}); // Update the state of MainScreen when called
+      },
+    );
+
+    final CustomTextInputController phoneController = CustomTextInputController(
+      //textEditingController: TextEditingController(),
+      options: phoneInputOptions,
+      context: context,
+      updateState: () {
+        setState(() {}); // Update the state of MainScreen when called
+      },
+    );
+
+    final CustomTextInputController emailController = CustomTextInputController(
+      //textEditingController: TextEditingController(),
+      options: emailInputOptions,
+      context: context,
+      updateState: () {
+        setState(() {}); // Update the state of MainScreen when called
+      },
+    );
+
+    final CustomTextInputController passwordController = CustomTextInputController(
+      //textEditingController: TextEditingController(),
+      options: passwordInputOptions,
+      context: context,
+      updateState: () {
+        setState(() {}); // Update the state of MainScreen when called
+      },
+    );
+
+    final CustomTextInputController paymentController = CustomTextInputController(
+      //textEditingController: TextEditingController(),
+      options: paymentInputOptions,
+      context: context,
+      updateState: () {
+        setState(() {}); // Update the state of MainScreen when called
+      },
+    );
+
+
     return Form(
-          child: Column(
-            children: [
-              CustomTextInput(
-                controller: _nameController,
-                options: nameInputOptions,
-              ),
-              CustomTextInput(
-                controller: _phoneController,
-                options: phoneInputOptions,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // Handle form submission here
-                },
-                child: const Text('Submit'),
-              ),
-            ],
+      child: Column(
+        children: [
+          CustomTextInput(
+            controller: nameController
           ),
-        );
+          CustomTextInput(
+            controller: phoneController,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              // Handle form submission here
+            },
+            child: const Text('Submit'),
+          ),
+        ],
+      ),
+    );
   }
 }
