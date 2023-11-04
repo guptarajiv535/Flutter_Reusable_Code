@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../controller/custom_text_input_controller.dart';
+import '../utilities/visibilityNotifier.dart';
 
 class CustomTextInput extends StatefulWidget {
 
@@ -53,13 +54,12 @@ class _CustomTextInputState extends State<CustomTextInput> {
         ),
         onChanged: (textFieldValue) {
           widget.controller.checkValidation(textFieldValue);
-          // widget.controller
-          //     .updateState(); // Call the callback function to trigger a rebuild
+          setState(() {});
         },
         keyboardType: widget.controller.getInputType(),
         obscureText: widget.controller.options.inputType ==
             InputType.Password &&
-            !widget.controller.visibility,
+            !widget.controller.visibilityNotifier.isVisible,
         maxLength: widget.controller.options.inputType == InputType.PaymentCard
             ? 19
             : widget.controller.options.maxLength ??

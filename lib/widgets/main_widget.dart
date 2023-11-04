@@ -4,8 +4,17 @@ import '../components/input_component.dart';
 import '../controller/custom_text_input_controller.dart';
 import '../main.dart';
 import '../utilities/text_input_options.dart';
+import '../utilities/visibilityNotifier.dart';
 
 class MainScreen extends State<MyHomePage> {
+  late final VisibilityNotifier _visibilityNotifier;
+
+  @override
+  void initState() {
+    super.initState();
+    _visibilityNotifier = VisibilityNotifier();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,45 +85,35 @@ class MainScreen extends State<MyHomePage> {
       //textEditingController: TextEditingController(),
       options: nameInputOptions,
       context: context,
-      updateState: () {
-        setState(() {}); // Update the state of MainScreen when called
-      },
+      visibilityNotifier: _visibilityNotifier,
     );
 
     final CustomTextInputController phoneController = CustomTextInputController(
       //textEditingController: TextEditingController(),
       options: phoneInputOptions,
       context: context,
-      updateState: () {
-        setState(() {}); // Update the state of MainScreen when called
-      },
+      visibilityNotifier: _visibilityNotifier,
     );
 
     final CustomTextInputController emailController = CustomTextInputController(
       //textEditingController: TextEditingController(),
       options: emailInputOptions,
       context: context,
-      updateState: () {
-        setState(() {}); // Update the state of MainScreen when called
-      },
+      visibilityNotifier: _visibilityNotifier,
     );
 
     final CustomTextInputController passwordController = CustomTextInputController(
       //textEditingController: TextEditingController(),
       options: passwordInputOptions,
       context: context,
-      updateState: () {
-        setState(() {}); // Update the state of MainScreen when called
-      },
+      visibilityNotifier: _visibilityNotifier,
     );
 
     final CustomTextInputController paymentController = CustomTextInputController(
       //textEditingController: TextEditingController(),
       options: paymentInputOptions,
       context: context,
-      updateState: () {
-        setState(() {}); // Update the state of MainScreen when called
-      },
+      visibilityNotifier: _visibilityNotifier,
     );
 
 
@@ -126,6 +125,9 @@ class MainScreen extends State<MyHomePage> {
           ),
           CustomTextInput(
             controller: phoneController,
+          ),
+          CustomTextInput(
+            controller: passwordController,
           ),
           ElevatedButton(
             onPressed: () {

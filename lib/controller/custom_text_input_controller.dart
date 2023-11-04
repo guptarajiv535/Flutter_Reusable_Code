@@ -1,27 +1,29 @@
 //get border of textinput filed
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../utilities/masked_input_formatter.dart';
 import '../utilities/text_input_options.dart';
+import '../utilities/visibilityNotifier.dart';
 
 class CustomTextInputController {
   late final TextEditingController textEditingController;
   late final CustomTextInputOptions options;
   late final BuildContext context;
-
-  final VoidCallback updateState; // Callback function to update the state
+  late final VisibilityNotifier visibilityNotifier;
 
   bool isValidate = true;
   String validationMessage = '';
-  bool visibility = false;
+  //bool visibility = false;
   int oldTextSize = 0;
 
 
   CustomTextInputController({
     required this.options,
     required this.context,
-    required this.updateState,
+    required this.visibilityNotifier,
   }) {
     textEditingController = TextEditingController();
   }
@@ -87,7 +89,6 @@ class CustomTextInputController {
           options.errorMessage ?? 'Card number is not correct';
     }
     oldTextSize = textFieldValue.length;
-    updateState();
   }
 
 // return input type for setting keyboard
@@ -196,11 +197,11 @@ class CustomTextInputController {
     if (options.inputType == InputType.Password) {
       return IconButton(
         onPressed: () {
-          visibility = !visibility;
-          updateState();
+          toggleVisibility();
+          //updateState();
         },
         icon: Icon(
-          visibility ? Icons.visibility : Icons.visibility_off,
+          visibilityNotifier.isVisible ? Icons.visibility : Icons.visibility_off,
           color: options.themeColor ?? Theme.of(context).primaryColor,
         ),
       );
@@ -208,6 +209,11 @@ class CustomTextInputController {
       return const Opacity(opacity: 0, child: Icon(Icons.phone));
     }
   }
+
+  void toggleVisibility() {
+    visibilityNotifier.isVisible = !visibilityNotifier.isVisible;
+  }
+
 }
 
 
